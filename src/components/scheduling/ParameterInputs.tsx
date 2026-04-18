@@ -2,7 +2,7 @@ import {TaskParameter} from "../../types/task";
 
 interface ParameterInputsProps {
     parameters: TaskParameter[];
-    values: {};
+    values: Record<string, string | number>;
     onChange: (value: { [p: number]: string }) => void;
 }
 
@@ -15,16 +15,19 @@ export default function ParameterInputs({
         onChange({ ...values, [name]: value });
     };
 
-    // @ts-ignore
+
     return (
         <div>
-            {parameters.map((p: TaskParameter) => (
+            {parameters.map((p) => (
                 <div key={p.name}>
-                    <label>{p.name}</label>
+                    <label>
+                        {p.name} {p.required && "*"}
+                    </label>
+
                     <input
-                        type={p.type === "number" ? "number" : "text"}
-                        required={p.required}
+                        type="text"
                         value={values[p.name] || ""}
+                        required={p.required}
                         onChange={(e) => handleChange(p.name, e.target.value)}
                     />
                 </div>

@@ -1,15 +1,24 @@
 export type ScheduleType =
     | "ONE_TIME"
-    | "RECURRING"
+    | "INTERVAL"
     | "WEEKLY"
     | "CRON";
 
+export type IntervalConfig = {
+    startTime: string;   // ISO string
+    interval: number;
+    unit: "SECONDS" | "MINUTES" | "HOURS";
+};
+
 export interface Scheduling {
     id: number;
-    taskId: string;
+    taskKey: string;
     taskName: string;
-    scheduleType: ScheduleType;
+    type: ScheduleType;
+    runAt: string;
+    startTime: string;
+    intervalTime: number;
+    unit: string;
     config: any; // depends on type
-    parameters: Record<string, any>;
-    nextExecution?: string;
+    taskParams: Record<string, any>;
 }

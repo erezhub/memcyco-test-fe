@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Scheduling } from "../types/scheduling";
 
-const BASE_URL = "/api/schedulings";
+const BASE_URL = "/api/schedules";
 
 export const getSchedulings = () =>
     axios.get<Scheduling[]>(BASE_URL);
